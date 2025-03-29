@@ -8,11 +8,10 @@ from langchain.vectorstores import FAISS
 from langchain.chains.question_answering import load_qa_chain
 from langchain_google_genai import ChatGoogleGenerativeAI
 
-model_name = "gemini-2.0-flash"
-project_id = "323423126135"
-
 headers = {
-    "Authorization": st.secrets{API_KEY}
+    "Authorization": st.secrets[API_KEY],
+    "Authorization": st.secrets[model_name],
+    "Authorization": st.secrets[project_id],
 }
 
 st.title("LexiFile")
