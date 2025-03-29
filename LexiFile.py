@@ -2,6 +2,7 @@
 
 import streamlit as st
 import faiss
+import langchain_community
 from PyPDF2 import PdfReader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
