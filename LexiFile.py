@@ -12,8 +12,7 @@ model_name = "gemini-2.0-flash"
 project_id = "323423126135"
 
 headers = {
-    "Authorization": st.secrets{API_KEY},
-    "Accept": "application/json",
+    "Authorization": st.secrets{API_KEY}
 }
 
 st.title("LexiFile")
