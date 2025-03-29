@@ -8,11 +8,12 @@ from langchain.vectorstores import FAISS
 from langchain.chains.question_answering import load_qa_chain
 from langchain_google_genai import ChatGoogleGenerativeAI
 
-API_KEY = "AIzaSyC1QAZ-2coP-eNHPDjL2UgkSrpVfXxTzd4"
-model_name = "gemini-2.0-flash"
-project_id = "323423126135"
-
-
+headers = {
+    "Authorization": st.secrets{API_KEY},
+    "Authorization": st.secrets{model_name},
+    "Authorization": st.secrets{project_id},
+    "Accept": "application/json",
+}
 
 st.title("LexiFile")
 st.write("Turn your files into interactive knowledge. Ask it anything about your documents, and it'll provide AI-driven answers. ")
