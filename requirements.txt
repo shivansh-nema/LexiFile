@@ -1,0 +1,7 @@
+streamlit
+PyPDF2
+langchain.text_splitter
+langchain_google_genai
+langchain.vectorstores
+langchain.chains.question_answering
+langchain_google_genai
