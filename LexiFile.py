@@ -8,8 +8,9 @@ from langchain.vectorstores import FAISS
 from langchain.chains.question_answering import load_qa_chain
 from langchain_google_genai import ChatGoogleGenerativeAI
 
+api_key = st.secrets["API_KEY"]
 headers = {
-    "authorization": st.secrets["API_KEY"],
+    "authorization": api_key,
     "content-type": "application/json"
 }
 model_name = "gemini-2.0-flash"
@@ -36,7 +37,7 @@ if file is not None:
     )
     chunks = text_splitter.split_text(text)
 
-    embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001", google_api_key=API_KEY)
+    embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001", google_api_key=api_key)
 
     vector_store = FAISS.from_texts(chunks, embeddings)
 
