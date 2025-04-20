@@ -8,6 +8,11 @@ from langchain.vectorstores import FAISS
 from langchain.chains.question_answering import load_qa_chain
 from langchain_google_genai import ChatGoogleGenerativeAI
 
+st.set_page_config(
+    page_title="LexiFile",
+    page_icon="LexiFile_Favicon.png",
+)
+
 api_key = st.secrets["API_KEY"]
 headers = {
     "authorization": api_key,
