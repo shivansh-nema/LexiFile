@@ -8,7 +8,10 @@ from langchain.vectorstores import FAISS
 from langchain.chains.question_answering import load_qa_chain
 from langchain_google_genai import ChatGoogleGenerativeAI
 
-API_KEY = "<API key>"
+headers = {
+    "authorization": st.secrets["API_KEY"],
+    "content-type": "application/json"
+}
 model_name = "gemini-2.0-flash"
 project_id = "323423126135"
 
