@@ -47,7 +47,7 @@ if file is not None:
         match = vector_store.similarity_search(user_question)
 
         llm = ChatGoogleGenerativeAI(
-            api_key=API_KEY,
+            api_key=api_key,
             temperature=1,
             max_tokens=1000,
             model= model_name,
