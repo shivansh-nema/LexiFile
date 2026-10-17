@@ -47,7 +47,7 @@ if file is not None:
 
     user_question = st.text_input("Type your question here :-   ")
 
-        if user_question:
+    if user_question:
         match = vector_store.similarity_search(user_question, k=4)
 
         context = "\n\n".join(
