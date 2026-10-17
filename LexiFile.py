@@ -5,7 +5,6 @@ from PyPDF2 import PdfReader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_community.vectorstores import FAISS
-from langchain.chains.question_answering import load_qa_chain
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 st.set_page_config(
@@ -35,7 +34,7 @@ if file is not None:
         text += page.extract_text()
 
     text_splitter = RecursiveCharacterTextSplitter(
-        separators="\n",
+        separators=["\n\n", "\n", " ", ""],
         chunk_size=1000,
         chunk_overlap=150,
         length_function=len
@@ -49,16 +48,32 @@ if file is not None:
     user_question = st.text_input("Type your question here :-   ")
 
     if user_question:
-        match = vector_store.similarity_search(user_question)
+                match = vector_store.similarity_search(user_question, k=4)
 
-        llm = ChatGoogleGenerativeAI(
-            api_key=api_key,
-            temperature=1,
-            max_tokens=1000,
-            model= model_name,
-            project= project_id
+        context = "\n\n".join(
+            doc.page_content for doc in match
         )
 
-        chain = load_qa_chain(llm, chain_type="stuff")
-        response = chain.run(input_documents=match, question=user_question)
-        st.write(response)
+        llm = ChatGoogleGenerativeAI(
+            model="gemini-2.5-flash",
+            google_api_key=api_key,
+            temperature=0.2,
+            max_output_tokens=1000,
+        )
+
+        prompt = f"""
+        Answer the question using only the context below.
+        If the answer is not present in the context, say
+        that you could not find the answer in the document.
+
+        Context:
+        {context}
+
+        Question:
+        {user_question}
+
+        Answer:
+        """
+
+        response = llm.invoke(prompt)
+        st.write(response.content)
