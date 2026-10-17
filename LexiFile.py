@@ -50,9 +50,7 @@ if file is not None:
     if user_question:
                 match = vector_store.similarity_search(user_question, k=4)
 
-        context = "\n\n".join(
-            doc.page_content for doc in match
-        )
+        context = "\n\n".join(doc.page_content for doc in match)
 
         llm = ChatGoogleGenerativeAI(
             model="gemini-2.5-flash",
