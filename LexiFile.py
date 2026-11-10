@@ -59,14 +59,6 @@ headers = {
     "content-type": "application/json"
 }
 
-model_name = "gemini-3.8-flash"
-
-llm = ChatGoogleGenerativeAI(
-    model=model_name,
-    google_api_key=api_key,
-    max_output_tokens=1000
-)
-
 project_id = "323423126135"
 
 st.title("LexiFile")
@@ -101,10 +93,11 @@ if file is not None:
                 doc.page_content for doc in match
             )
 
+            model_name = "gemini-3.8-flash"
+
             llm = ChatGoogleGenerativeAI(
-                model="gemini-2.5-flash",
+                model=model_name,
                 google_api_key=api_key,
-                temperature=0.2,
                 max_output_tokens=1000
             )
 
