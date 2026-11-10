@@ -59,7 +59,7 @@ headers = {
     "authorization": api_key,
     "content-type": "application/json"
 }
-model_name = "gemini-2.0-flash"
+model_name = "gemini-3.8-flash"
 project_id = "323423126135"
 
 st.title("LexiFile")
