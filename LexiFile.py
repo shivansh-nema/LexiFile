@@ -59,6 +59,8 @@ headers = {
     "content-type": "application/json"
 }
 
+model_name = "gemini-3.8-flash"
+
 llm = ChatGoogleGenerativeAI(
     model=model_name,
     google_api_key=api_key,
