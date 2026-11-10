@@ -8,6 +8,10 @@ from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_google_genai import ChatGoogleGenerativeAI
 
+st.set_page_config(
+    page_title="LexiFile",
+    page_icon="LexiFile_Favicon.png",
+)
 
 @st.cache_resource(show_spinner="Processing your document...")
 def create_vector_store(pdf_bytes, api_key):
@@ -49,17 +53,18 @@ def create_vector_store(pdf_bytes, api_key):
 
     return vector_store
 
-st.set_page_config(
-    page_title="LexiFile",
-    page_icon="LexiFile_Favicon.png",
-)
-
 api_key = st.secrets["API_KEY"]
 headers = {
     "authorization": api_key,
     "content-type": "application/json"
 }
-model_name = "gemini-3.8-flash"
+
+llm = ChatGoogleGenerativeAI(
+    model=model_name,
+    google_api_key=api_key,
+    max_output_tokens=1000
+)
+
 project_id = "323423126135"
 
 st.title("LexiFile")
@@ -68,7 +73,6 @@ st.write("Turn your files into interactive knowledge. Ask it anything about your
 with st.sidebar:
     st.title("Your Documents")
     file = st.file_uploader("Upload a PDF file here,", type="pdf")
-
 
 if file is not None:
 
